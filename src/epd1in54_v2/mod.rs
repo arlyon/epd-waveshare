@@ -22,12 +22,10 @@ use embedded_hal_async::{digital::Wait, spi::SpiDevice};
 
 use crate::{
     color::Color,
+    epd1in54_v2::constants::{LUT_FULL_UPDATE, LUT_PARTIAL_UPDATE},
     error::ErrorKind,
     traits::{ErrorType, InternalWiAdditions, RefreshLut, WaveshareDisplay},
-    type_a::{
-        command::Command,
-        constants::{LUT_FULL_UPDATE, LUT_PARTIAL_UPDATE},
-    },
+    type_a::command::Command,
 };
 
 use crate::interface::DisplayInterface;
