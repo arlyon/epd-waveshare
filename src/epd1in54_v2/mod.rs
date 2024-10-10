@@ -14,10 +14,7 @@ const IS_BUSY_LOW: bool = false;
 const SINGLE_BYTE_WRITE: bool = true;
 
 use core::fmt::{Debug, Display};
-use embedded_hal::{
-    delay::*,
-    digital::{InputPin, OutputPin},
-};
+use embedded_hal::digital::{InputPin, OutputPin};
 use embedded_hal_async::{digital::Wait, spi::SpiDevice};
 
 use crate::{
@@ -47,7 +44,7 @@ pub struct Epd1in54<SPI, BUSY, DC, RST> {
 impl<SPI, BUSY, DC, RST> ErrorType<SPI, BUSY, DC, RST> for Epd1in54<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -61,13 +58,13 @@ where
 impl<SPI, BUSY, DC, RST> InternalWiAdditions<SPI, BUSY, DC, RST> for Epd1in54<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy,
     BUSY: InputPin + Wait,
-    BUSY::Error: Copy + Debug + Display,
+    BUSY::Error: Copy + Display,
     DC: OutputPin,
-    DC::Error: Copy + Debug + Display,
+    DC::Error: Copy + Display,
     RST: OutputPin,
-    RST::Error: Copy + Debug + Display,
+    RST::Error: Copy + Display,
 {
     async fn init(&mut self, spi: &mut SPI) -> Result<(), Self::Error> {
         self.interface.reset(spi, 10_000, 10_000).await?;
@@ -130,7 +127,7 @@ where
 impl<SPI, BUSY, DC, RST> WaveshareDisplay<SPI, BUSY, DC, RST> for Epd1in54<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -301,7 +298,7 @@ where
 impl<SPI, BUSY, DC, RST> Epd1in54<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,

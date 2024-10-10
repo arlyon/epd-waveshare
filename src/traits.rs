@@ -8,7 +8,7 @@ use crate::error::ErrorKind;
 pub trait Error<SPI, BUSY, DC, RST>: core::fmt::Debug
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -22,7 +22,7 @@ where
 impl<SPI, BUSY, DC, RST> Error<SPI, BUSY, DC, RST> for core::convert::Infallible
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -38,7 +38,7 @@ where
 pub trait ErrorType<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -70,7 +70,7 @@ pub(crate) trait InternalWiAdditions<SPI, BUSY, DC, RST>:
     ErrorType<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -96,7 +96,7 @@ pub trait WaveshareThreeColorDisplay<SPI, BUSY, DC, RST>:
     WaveshareDisplay<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -180,7 +180,7 @@ where
 pub trait WaveshareDisplay<SPI, BUSY, DC, RST>: ErrorType<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -332,7 +332,7 @@ where
 pub trait QuickRefresh<SPI, BUSY, DC, RST>: ErrorType<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,

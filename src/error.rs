@@ -66,7 +66,7 @@ where
 impl<SPI, BUSY, DC, RST> Display for ErrorKind<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -76,7 +76,7 @@ where
 {
     fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
         match self {
-            Self::SpiError(err) => Display::fmt(&err, f),
+            Self::SpiError(err) => Debug::fmt(&err, f),
             Self::BusyError(err) => Display::fmt(&err, f),
             Self::DcError(err) => Display::fmt(&err, f),
             Self::RstError(err) => Display::fmt(&err, f),
@@ -91,7 +91,7 @@ where
 impl<SPI, BUSY, DC, RST> Debug for ErrorKind<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
@@ -116,7 +116,7 @@ where
 impl<SPI, BUSY, DC, RST> Error<SPI, BUSY, DC, RST> for ErrorKind<SPI, BUSY, DC, RST>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,

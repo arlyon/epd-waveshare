@@ -28,7 +28,7 @@ impl<SPI, BUSY, DC, RST, const SINGLE_BYTE_WRITE: bool>
     DisplayInterface<SPI, BUSY, DC, RST, SINGLE_BYTE_WRITE>
 where
     SPI: SpiDevice,
-    SPI::Error: Copy + Debug + Display,
+    SPI::Error: Copy + Debug,
     BUSY: InputPin + Wait,
     BUSY::Error: Copy + Debug + Display,
     DC: OutputPin,
